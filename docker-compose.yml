@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: safepay-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: safepay
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: safepay-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
