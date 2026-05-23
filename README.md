@@ -40,3 +40,11 @@ Sistema de monitoramento de fraudes financeiras desenvolvido para demonstrar uma
 ### 1. Subir com Docker
 ```bash
 docker compose up -d
+
+---
+
+## 📊 Qualidade de Código
+
+Este projeto utiliza SonarCloud para análise de qualidade de código.
+
+🔗 https://sonarcloud.io/dashboard?id=safepay-monitor
