@@ -4,12 +4,52 @@
     <title>SafePay Monitor</title>
 </head>
 <body>
+
 <h1>SafePay Monitor</h1>
 
 <p>Sistema de monitoramento de fraudes financeiras</p>
 
-<button onclick="alert('Frontend funcionando!')">
-    Testar Front-end
-</button>
+<h3>Criar usuário</h3>
+
+<input id="nome" placeholder="Nome">
+<input id="email" placeholder="Email">
+
+<button onclick="criarUsuario()">Salvar</button>
+
+<h3>Lista de usuários</h3>
+<button onclick="listarUsuarios()">Carregar usuários</button>
+
+<ul id="lista"></ul>
+
+<script>
+    const API = "http://localhost:8080/usuarios";
+
+    // CREATE
+    function criarUsuario() {
+        fetch(API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                nome: document.getElementById("nome").value,
+                email: document.getElementById("email").value
+            })
+        }).then(() => alert("Usuário criado!"));
+    }
+
+    // READ
+    function listarUsuarios() {
+        fetch(API)
+            .then(res => res.json())
+            .then(data => {
+                const lista = document.getElementById("lista");
+                lista.innerHTML = "";
+
+                data.forEach(u => {
+                    lista.innerHTML += `<li>${u.nome} - ${u.email}</li>`;
+                });
+            });
+    }
+</script>
+
 </body>
 </html>
